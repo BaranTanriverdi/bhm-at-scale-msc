@@ -1,0 +1,84 @@
+name: ML System Card Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: "Run identifier to apply"
+        required: true
+        type: string
+
+concurrency:
+  group: ml-system-card-apply-${{ github.ref }}-${{ inputs.runId }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
+jobs:
+  apply:
+    name: Apply reviewed proposal
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install script dependencies
+        run: npm ci --prefix scripts
+
+      - name: Build workflow utilities
+        run: npm run build --prefix scripts
+
+      - name: Apply decisions and write artifacts
+        env:
+          RUN_ID: ${{ inputs.runId }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run workflow:apply --prefix scripts -- --run-id "$RUN_ID"
+
+      - name: Run validation tests
+        env:
+          CI: true
+        run: npm test --prefix scripts
+
+      - name: Commit deterministic artifacts
+        env:
+          RUN_ID: ${{ inputs.runId }}
+        run: |
+          if git diff --quiet -- docs/ lib/; then
+            echo "No card updates to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/ lib/
+            git commit -m "chore(card): apply ${RUN_ID}"
+            git push
+          fi
+
+      - name: Auto-merge PR if checks are green
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash
+
+      - name: Upload card artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: card-${{ inputs.runId }}
+          path: |
+            docs/ml_system_card.yaml
+            docs/ml_system_card.anchors.json
+            docs/.card_runs
+          if-no-files-found: warn
