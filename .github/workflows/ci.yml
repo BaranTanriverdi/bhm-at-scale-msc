@@ -1,0 +1,69 @@
+name: ML System Card CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "lib/**"
+      - "scripts/**"
+      - "app/**"
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate ML System Card changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install script dependencies
+        run: npm ci --prefix scripts
+
+      - name: Build workflow utilities
+        run: npm run build --prefix scripts
+
+      - name: Generate Semantic Diff Report
+        id: diff-report
+        if: always()
+        run: |
+          npm run workflow:diff-reporter --prefix scripts -- \
+            --base-ref "${{ github.event.pull_request.base.sha }}" \
+            --head-ref "${{ github.event.pull_request.head.sha }}" \
+            --output diff-report.md
+
+          echo "HAS_REPORT=true" >> $GITHUB_ENV
+
+      - name: Post Diff Report
+        if: always()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: semantic-diff
+          path: diff-report.md
+
+      - name: Run card validation suite
+        env:
+          CI: true
+        run: npm run workflow:ci --prefix scripts -- --base-ref "${{ github.event.pull_request.base.sha }}" --head-ref "${{ github.event.pull_request.head.sha }}"
+
+      - name: Run unit tests
+        env:
+          CI: true
+        run: npm test --prefix scripts
