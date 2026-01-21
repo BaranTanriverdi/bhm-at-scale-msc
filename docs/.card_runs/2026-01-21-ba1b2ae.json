@@ -1,0 +1,251 @@
+{
+  "engine": "ml-system-card-local",
+  "run_id": "run-2026-01-21-19-07-09",
+  "base_sha": "<redacted>",
+  "changed_paths": [
+    "$.business.executiveSummary",
+    "$.business.intendedUse",
+    "$.business.useCase",
+    "$.business.userPopulations",
+    "$.devInsight.codeOverview.components",
+    "$.devInsight.codeOverview.entrypoints",
+    "$.devInsight.codeOverview.languages",
+    "$.governance.policies",
+    "$.meta.language",
+    "$.meta.links",
+    "$.meta.maturity",
+    "$.meta.owners",
+    "$.meta.tags",
+    "$.meta.title",
+    "$.mlCore.datasets",
+    "$.mlCore.training"
+  ],
+  "low_confidence_rows_only": [
+    {
+      "path": "$.business.hazardousUseCases",
+      "confidence": 0.1,
+      "sources": [
+        "LICENSE.txt#L1-L40",
+        "README.md#L1-L40"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.business.nonGoals",
+      "confidence": 0.2,
+      "sources": [
+        "README.md#L1-L40",
+        "src/bhm_at_scale/__init__.py#L1-L20"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.business.outOfScopeUse",
+      "confidence": 0.2,
+      "sources": [
+        "README.md#L20-L80",
+        "notebooks/01-preprocessing.ipynb#L1-L160"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.devInsight.architecture.dataFlow",
+      "confidence": 0,
+      "sources": [
+        "notebooks/01-preprocessing.ipynb#L1-L200",
+        "notebooks/02-model.ipynb#L1-L260",
+        "notebooks/03-evaluation.ipynb#L1-L160",
+        "src/bhm_at_scale/model.py#L65-L220",
+        "src/bhm_at_scale/plot.py#L1-L200",
+        "src/bhm_at_scale/preprocess.py#L1-L120"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.devInsight.architecture.depsSummary",
+      "confidence": 0,
+      "sources": [
+        "environment.lock.yaml#L70-L140",
+        "environment.yaml#L1-L40",
+        "notebooks/02-model.ipynb#L20-L80"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.devInsight.architecture.publicApis",
+      "confidence": 0,
+      "sources": [
+        "src/bhm_at_scale/handler.py#L1-L200",
+        "src/bhm_at_scale/model.py#L1-L260",
+        "src/bhm_at_scale/plot.py#L1-L200",
+        "src/bhm_at_scale/preprocess.py#L1-L160"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.devInsight.qualitySignals.coverageHint",
+      "confidence": 0.3,
+      "sources": [
+        ".coveragerc#L1-L40",
+        "setup.cfg#L54-L86",
+        "tests/conftest.py#L1-L20"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.devInsight.qualitySignals.testsPresent",
+      "confidence": 0.78,
+      "sources": [
+        "setup.cfg#L54-L86",
+        "tests/conftest.py#L1-L20"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.mlCore.baselines",
+      "confidence": 0.2,
+      "sources": [
+        "notebooks/02-model.ipynb#L80-L190"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.mlCore.features",
+      "confidence": 0.3,
+      "sources": [
+        "src/bhm_at_scale/model.py#L33-L62"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.mlCore.problem",
+      "confidence": 0.4,
+      "sources": [
+        "notebooks/02-model.ipynb#L40-L120",
+        "src/bhm_at_scale/model.py#L65-L120"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.provenance.changelog[0]",
+      "confidence": 0.2,
+      "sources": [
+        ".coveragerc#L1",
+        ".github/workflows/apply.yml#L1",
+        ".github/workflows/ci.yml#L1",
+        ".github/workflows/generator.yml#L1",
+        ".gitignore#L1",
+        ".isort.cfg#L1",
+        ".pre-commit-config.yaml#L1",
+        "AUTHORS.rst#L1",
+        "CHANGELOG.rst#L1",
+        "LICENSE.txt#L1",
+        "README.md#L1",
+        "data/.gitignore#L1",
+        "data/external/.gitignore#L1",
+        "data/interim/.gitignore#L1",
+        "data/preprocessed/.gitignore#L1",
+        "data/raw/.gitignore#L1",
+        "data/result/.gitignore#L1",
+        "docs/Makefile#L1",
+        "docs/_static/.gitignore#L1",
+        "docs/authors.rst#L1",
+        "docs/changelog.rst#L1",
+        "docs/conf.py#L1",
+        "docs/index.rst#L1",
+        "docs/license.rst#L1",
+        "docs/ml_system_card.yaml#L1",
+        "docs/stakeholders.yaml#L1",
+        "environment.lock.yaml#L1",
+        "environment.yaml#L1",
+        "lib/card/deterministic.ts#L1",
+        "lib/card/types.ts#L1",
+        "lib/decisions.schema.json#L1",
+        "lib/ml_system_card.schema.json#L1",
+        "lib/proposal.schema.json#L1",
+        "lib/tsconfig.base.json#L1",
+        "notebooks/01-preprocessing.ipynb#L1",
+        "notebooks/02-model.ipynb#L1",
+        "notebooks/03-evaluation.ipynb#L1",
+        "scripts/build/copy-prompts.mjs#L1",
+        "scripts/eslint.config.mjs#L1",
+        "scripts/package-lock.json#L1",
+        "scripts/package.json#L1",
+        "scripts/prettier.config.mjs#L1",
+        "scripts/prompts/extractor.v1.md#L1",
+        "scripts/prompts/notes.v1.md#L1",
+        "scripts/prompts/reasoner.v1.md#L1",
+        "scripts/prompts/verifier.v1.md#L1",
+        "scripts/src/actions/apply.ts#L1",
+        "scripts/src/actions/ci.ts#L1",
+        "scripts/src/actions/diff-reporter.ts#L1",
+        "scripts/src/actions/generator.ts#L1",
+        "scripts/src/actions/post-summary.ts#L1",
+        "scripts/src/analysis/ast.ts#L1",
+        "scripts/src/analysis/bundle.ts#L1",
+        "scripts/src/analysis/dependencies.ts#L1",
+        "scripts/src/analysis/diff_inspector.ts#L1",
+        "scripts/src/analysis/learning.ts#L1",
+        "scripts/src/analysis/repository.ts#L1",
+        "scripts/src/analysis/signals.ts#L1",
+        "scripts/src/card/deterministic.ts#L1",
+        "scripts/src/card/seed.ts#L1",
+        "scripts/src/config/env.ts#L1",
+        "scripts/src/config/index.ts#L1",
+        "scripts/src/constants.ts#L1",
+        "scripts/src/contracts/validators.ts#L1",
+        "scripts/src/incremental_set.ts#L1",
+        "scripts/src/llm/client.ts#L1",
+        "scripts/src/llm/extractor.ts#L1",
+        "scripts/src/llm/formatters.ts#L1",
+        "scripts/src/llm/mock_data.ts#L1",
+        "scripts/src/llm/notes.ts#L1",
+        "scripts/src/llm/reasoner.ts#L1",
+        "scripts/src/llm/types.ts#L1",
+        "scripts/src/llm/verifier.ts#L1",
+        "scripts/src/pipeline/deterministic.ts#L1",
+        "scripts/src/safety/guards.ts#L1",
+        "scripts/src/safety/redaction.ts#L1",
+        "scripts/src/tools/index.ts#L1",
+        "scripts/src/tools/types.ts#L1",
+        "scripts/src/utils/exec.ts#L1",
+        "scripts/src/utils/fs.ts#L1",
+        "scripts/src/utils/git.ts#L1",
+        "scripts/src/utils/github.ts#L1",
+        "scripts/src/utils/logger.ts#L1",
+        "scripts/src/utils/path.ts#L1",
+        "scripts/src/utils/prompts.ts#L1",
+        "scripts/src/validate_card.ts#L1",
+        "scripts/src/write_anchors.ts#L1",
+        "scripts/src/write_card.ts#L1",
+        "scripts/test/anchors.test.ts#L1",
+        "scripts/test/deterministic.test.ts#L1",
+        "scripts/test/e2e/mock.test.ts#L1",
+        "scripts/test/fixtures/basic-project/PLAN.md#L1",
+        "scripts/test/fixtures/basic-project/README.md#L1",
+        "scripts/test/fixtures/basic-project/requirements.txt#L1",
+        "scripts/test/fixtures/basic-project/src/main.py#L1",
+        "scripts/test/incremental_set.test.ts#L1",
+        "scripts/test/integration.test.ts#L1",
+        "scripts/test/live/gpt51.test.ts#L1",
+        "scripts/tsconfig.build.json#L1",
+        "scripts/tsconfig.json#L1",
+        "scripts/vitest.config.ts#L1",
+        "setup.cfg#L1",
+        "setup.py#L1",
+        "src/bhm_at_scale/__init__.py#L1",
+        "src/bhm_at_scale/handler.py#L1",
+        "src/bhm_at_scale/model.py#L1",
+        "src/bhm_at_scale/plot.py#L1",
+        "src/bhm_at_scale/preprocess.py#L1",
+        "src/bhm_at_scale/utils.py#L1",
+        "tests/conftest.py#L1"
+      ],
+      "disposition": "rejected"
+    }
+  ],
+  "yaml_hash": "ba1b2aefefdf4c0752fefa038111d4b69bbe2006971c89a462fdb46ae639e0b8",
+  "schema_id": "https://ml-system-card.dev/schema/v1",
+  "coverage_non_null": 1,
+  "timestamp": "2026-01-21T19:58:17.079Z"
+}
