@@ -1,49 +1,137 @@
-$schema: ../lib/ml_system_card.schema.json
-meta:
-  title: New ML System Card
-  language: en
-  owners: []
-  tags: []
-  links: {}
-  createdAt: '2026-01-21T19:06:36.758Z'
-  lastUpdated: '2026-01-21T19:06:36.758Z'
+ai: {}
 business:
-  nonGoals: []
-  kpis: []
-  outOfScopeUse: []
-  userPopulations: []
+  executiveSummary: >-
+    This repository implements a scalable Bayesian hierarchical model for daily store-level sales forecasting,
+    accompanying the blog post "Finally! Bayesian Hierarchical Modelling at Scale". It uses JAX and NumPyro to fit a
+    Gamma-Poisson model that pools information across many retail stores while retaining store-specific effects. Data is
+    downloaded from the Rossmann store sales Kaggle dataset, preprocessed into a feature cube, and trained using
+    stochastic variational inference. The notebooks demonstrate end-to-end preprocessing, model fitting, posterior
+    analysis, and comparison against a conventional linear regression baseline. The project is intended as reproducible,
+    research-grade code rather than a production deployment.
   hazardousUseCases: []
+  intendedUse: >-
+    The intended use of this repository is to serve as a reproducible, educational example of Bayesian hierarchical
+    modelling at scale, showing how to implement a Gamma-Poisson sales forecasting model with JAX/NumPyro on the
+    Rossmann store sales dataset. It is meant for experimentation in notebooks, methodological exploration, and as a
+    template for adapting similar probabilistic models to other tabular time-series problems.
+  kpis: []
+  nonGoals: []
+  outOfScopeUse: []
+  useCase: >-
+    Forecasting daily sales for many retail stores using a Bayesian hierarchical Gamma-Poisson model that shares
+    statistical strength across stores while capturing store-specific effects, demonstrated on the Rossmann store sales
+    Kaggle dataset.
+  userPopulations:
+    - Data scientists and statisticians interested in Bayesian hierarchical models for time-series and count data.
+    - >-
+      Machine learning researchers and engineers experimenting with scalable probabilistic programming using JAX and
+      NumPyro.
 devInsight:
-  codeOverview:
-    languages: []
-    entrypoints: []
-    components: []
   architecture:
-    publicApis: []
     dataFlow: []
     depsSummary: []
+    publicApis: []
+  codeOverview:
+    components:
+      - keyFiles:
+          - notebooks/01-preprocessing.ipynb
+          - src/bhm_at_scale/preprocess.py
+          - src/bhm_at_scale/utils.py
+        name: Data preprocessing and feature cube construction
+        summary: >-
+          Loads Rossmann store and sales CSVs from Kaggle, performs cleansing and basic feature engineering with pandas,
+          dummy-encodes categorical variables, and reshapes the data into a StoreId × Timestep feature cube suitable for
+          hierarchical modelling.
+      - keyFiles:
+          - src/bhm_at_scale/model.py
+          - notebooks/02-model.ipynb
+        name: Gamma-Poisson hierarchical sales model
+        summary: >-
+          Defines a Gamma-Poisson hierarchical model for daily store sales and its variational guides using NumPyro
+          primitives, including global and per-store coefficients and dispersion parameters, plus helpers for predictive
+          inference and local adaptation to new stores.
+      - keyFiles:
+          - src/bhm_at_scale/handler.py
+          - notebooks/02-model.ipynb
+        name: Model training and SVI handler
+        summary: >-
+          Wraps NumPyro’s SVI API in a ModelHandler class that manages optimizer state, training loops, logging,
+          checkpointing of optimizer state, and convenient prediction via Predictive for arbitrary input tensors.
+      - keyFiles:
+          - notebooks/03-evaluation.ipynb
+          - src/bhm_at_scale/plot.py
+        name: Evaluation and visualization
+        summary: >-
+          Reads posterior summaries and predictions, visualises store-level sales histories with promotion and holiday
+          overlays, and plots global weekday and promotion effects to compare hierarchical estimates with per-store
+          coefficients.
+    entrypoints:
+      - notebooks/01-preprocessing.ipynb
+      - notebooks/02-model.ipynb
+      - notebooks/03-evaluation.ipynb
+    languages:
+      - Python
+      - Jupyter Notebook
   qualitySignals:
     complexityHints: []
     todoHotspots: []
   runtimePerf: {}
-mlCore:
-  problem: null
-  datasets: []
-  features: []
-  baselines: []
-  qualities: []
-  failureModes: []
-integration:
-  errorModel: []
-  operationalQualities: []
-  fallbacks: []
-  observability: []
-  driftSignals: []
 governance:
-  policies: []
   assessments: []
+  policies:
+    - >-
+      Source code is licensed under GPL-2.0-or-later (GNU General Public License version 2), so redistribution and use
+      must comply with the GPL terms.
   riskRegister: []
   signOffs: []
+integration:
+  driftSignals: []
+  errorModel: []
+  fallbacks: []
+  observability: []
+  operationalQualities: []
+meta:
+  createdAt: '2026-01-21T19:06:36.758Z'
+  language: en
+  lastUpdated: '2026-01-21T19:06:36.758Z'
+  links:
+    repo: https://github.com/FlorianWilhelm/bhm-at-scale
+  maturity: PoC
+  owners:
+    - name: Florian Wilhelm
+      role: Author & Maintainer
+  tags:
+    - bayesian
+    - hierarchical-model
+    - numpyro
+    - jax
+    - sales-forecasting
+    - rossmann
+  title: Bayesian Hierarchical Modelling at Scale
+mlCore:
+  baselines: []
+  datasets:
+    - license: Kaggle dataset subject to Kaggle terms of use
+      name: Rossmann Store Sales (Kaggle)
+      uri: kaggle://pratyushakar/rossmann-store-sales
+  failureModes: []
+  features: []
+  problem: null
+  qualities: []
+  training:
+    framework: NumPyro (JAX)
+    frameworkVersion: 0.7.2
+    hardware: Not specified (depends on available JAX device)
+    hyperparams:
+      batching: full-batch over all stores and days
+      loss: Trace_ELBO(num_particles=1)
+      lr_finetune: 0.001
+      lr_initial: 0.1
+      n_epochs_finetune: 1000
+      n_epochs_initial: 5000
+      optimizer: Adam
+    randomSeed: 0
 provenance:
   changelog: []
-ai: {}
+  lastGeneratedAt: '2026-01-21T19:58:16.989Z'
+stakeholderNotes: {}
