@@ -1,0 +1,110 @@
+{
+  "engine": "ml-system-card-local",
+  "run_id": "run-2026-02-26-17-21-39",
+  "base_sha": "<redacted>",
+  "changed_paths": [
+    "$.business.executiveSummary",
+    "$.business.hazardousUseCases",
+    "$.business.intendedUse",
+    "$.business.nonGoals",
+    "$.business.outOfScopeUse",
+    "$.business.useCase",
+    "$.business.userPopulations",
+    "$.devInsight.architecture.dataFlow",
+    "$.devInsight.architecture.depsSummary",
+    "$.devInsight.architecture.publicApis",
+    "$.devInsight.codeOverview.components",
+    "$.devInsight.codeOverview.entrypoints",
+    "$.devInsight.codeOverview.languages",
+    "$.integration.fallbacks",
+    "$.meta.links",
+    "$.meta.maturity",
+    "$.meta.owners",
+    "$.meta.tags",
+    "$.meta.title",
+    "$.mlCore.artifactURIs",
+    "$.mlCore.baselines",
+    "$.mlCore.datasets",
+    "$.mlCore.failureModes",
+    "$.mlCore.features",
+    "$.mlCore.problem",
+    "$.mlCore.training",
+    "$.provenance.changelog",
+    "$.provenance.changelog[0]"
+  ],
+  "low_confidence_rows_only": [
+    {
+      "path": "$.devInsight.runtimePerf",
+      "confidence": 0.4,
+      "sources": [
+        "notebooks/02-model.ipynb#L80-L120",
+        "src/bhm_at_scale/handler.py#L60-L130",
+        "src/bhm_at_scale/model.py#L59-L140"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.governance.policies",
+      "confidence": 0.5,
+      "sources": [
+        "LICENSE.txt#L1-L40",
+        "README.md#L3-L8",
+        "setup.cfg#L5-L15"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.integration.driftSignals",
+      "confidence": 0.2,
+      "sources": [
+        "notebooks/03-evaluation.ipynb#L80-L160"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.integration.errorModel",
+      "confidence": 0.3,
+      "sources": [
+        "notebooks/02-model.ipynb#L100-L170",
+        "notebooks/03-evaluation.ipynb#L40-L100",
+        "src/bhm_at_scale/model.py#L59-L140",
+        "src/bhm_at_scale/utils.py#L1-L40"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.integration.observability",
+      "confidence": 0.4,
+      "sources": [
+        "notebooks/02-model.ipynb#L110-L190",
+        "notebooks/03-evaluation.ipynb#L1-L160",
+        "src/bhm_at_scale/plot.py#L1-L200"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.integration.operationalQualities",
+      "confidence": 0.3,
+      "sources": [
+        "environment.yaml#L1-L30",
+        "notebooks/01-preprocessing.ipynb#L1-L120",
+        "notebooks/02-model.ipynb#L1-L140"
+      ],
+      "disposition": "rejected"
+    },
+    {
+      "path": "$.mlCore.qualities",
+      "confidence": 0.3,
+      "sources": [
+        "notebooks/02-model.ipynb#L130-L210",
+        "notebooks/03-evaluation.ipynb#L80-L160",
+        "src/bhm_at_scale/utils.py#L1-L40"
+      ],
+      "disposition": "rejected"
+    }
+  ],
+  "yaml_hash": "6cf18c46240a5b5cc17955d6b1f9fbbde28da4b80f9cfb537feaaab84beb7f1b",
+  "schema_id": "https://ml-system-card.dev/schema/v1",
+  "coverage_non_null": 1,
+  "timestamp": "2026-02-26T17:40:03.836Z"
+}
