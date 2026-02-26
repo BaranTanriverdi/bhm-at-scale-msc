@@ -43,5 +43,22 @@
   "decision_edited_pct": 0,
   "decision_rejected_pct": 0,
   "decision_undecided_pct": 0,
-  "decisions_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.proposals/run-2026-02-26-17-21-39.decisions.json"
+  "decisions_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.proposals/run-2026-02-26-17-21-39.decisions.json",
+  "apply_success": 1,
+  "schema_valid": 1,
+  "yaml_hash": "6cf18c46240a5b5cc17955d6b1f9fbbde28da4b80f9cfb537feaaab84beb7f1b",
+  "apply_attempts_until_success": 1,
+  "receipt_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.card_runs/2026-02-26-6cf18c4.json",
+  "accepted_nontrivial_count": 0,
+  "accepted_nontrivial_with_anchor_count": 0,
+  "anchor_compliance_accepted_nontrivial": 0,
+  "resolvable_anchor_count": 0,
+  "total_evaluated_anchor_count": 0,
+  "anchor_resolvability_rate_accepted": 0,
+  "populated_leaf_count": 218,
+  "populated_leaf_anchored_count": 6,
+  "anchored_field_coverage_leaf": 0.027522935779816515,
+  "added_lines": 1167,
+  "removed_lines": 36,
+  "msc_diff_lines": 1203
 }
