@@ -352,6 +352,10 @@ function mergeFacts(rawFacts: RawFactPayload[], baselineFacts: Fact[], headSha: 
   if (rawFacts.length === 0) {
     return baselineFacts;
   }
+
+  // Paths managed exclusively by the deterministic pipeline — never accept LLM overrides
+  const DETERMINISTIC_ONLY_PREFIXES = ["$.provenance.changelog", "$.meta.createdAt", "$.meta.lastUpdated", "$.ai."];
+
   const map = new Map<string, Fact>();
   baselineFacts.forEach((fact) => {
     map.set(fact.jsonPath, { ...fact, repoSources: fact.repoSources.map((anchor) => ({ ...anchor })) });
@@ -359,6 +363,10 @@ function mergeFacts(rawFacts: RawFactPayload[], baselineFacts: Fact[], headSha: 
 
   for (const candidate of rawFacts) {
     if (!candidate.jsonPath) {
+      continue;
+    }
+    // Skip LLM facts that collide with deterministic-only paths
+    if (DETERMINISTIC_ONLY_PREFIXES.some((prefix) => candidate.jsonPath!.startsWith(prefix))) {
       continue;
     }
     const existing = map.get(candidate.jsonPath);
