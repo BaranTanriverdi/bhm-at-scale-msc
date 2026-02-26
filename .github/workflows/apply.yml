@@ -100,11 +100,14 @@ jobs:
         if: steps.apply_step.outcome == 'failure'
         run: exit 1
 
-      - name: Auto-merge PR if checks are green
+      - name: Merge PR into default branch
+        if: steps.apply_step.outcome == 'success'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr merge --squash --auto "${{ github.ref_name }}" || echo "Auto-merge not available (branch protection not configured); skipping."
+        run: |
+          gh pr merge --squash --delete-branch "${{ github.ref_name }}" \
+            || echo "⚠️ PR merge failed (may require manual merge); continuing."
 
       - name: Upload card artifacts
         if: always()
