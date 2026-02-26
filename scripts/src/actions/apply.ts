@@ -192,6 +192,18 @@ async function main(): Promise<void> {
     value: new Date().toISOString()
   });
 
+  // Inject stakeholder notes from proposal (they are not represented as facts)
+  if (proposal.notes && Object.keys(proposal.notes).length > 0) {
+    acceptedPatch.push({
+      op: "add",
+      path: "/stakeholderNotes",
+      value: proposal.notes
+    });
+    logger.info("Injecting stakeholder notes into card", {
+      stakeholders: Object.keys(proposal.notes)
+    });
+  }
+
   const { newYaml, sha256 } = applyPatchAndWriteCard(currentCardYaml, acceptedPatch);
   await writeTextFile(CARD_PATH, newYaml);
 
