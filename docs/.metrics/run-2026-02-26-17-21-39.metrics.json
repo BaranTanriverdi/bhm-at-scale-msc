@@ -34,5 +34,14 @@
   "pass_notes_completion_tokens": 5616,
   "llm_model": "gpt-5.1",
   "generated_at": "2026-02-26T17:38:32.329Z",
-  "proposal_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.proposals/run-2026-02-26-17-21-39.json"
+  "proposal_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.proposals/run-2026-02-26-17-21-39.json",
+  "decision_accepted_count": 35,
+  "decision_edited_count": 0,
+  "decision_rejected_count": 0,
+  "decision_undecided_count": 0,
+  "decision_accepted_pct": 1,
+  "decision_edited_pct": 0,
+  "decision_rejected_pct": 0,
+  "decision_undecided_pct": 0,
+  "decisions_path": "/home/runner/work/bhm-at-scale-msc/bhm-at-scale-msc/docs/.proposals/run-2026-02-26-17-21-39.decisions.json"
 }
